@@ -5,7 +5,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
 # Load dataset
-data = pd.read_csv('data/crop_data.csv')
+data = pd.read_csv("crop_data.csv")
 
 # Features and target variable
 X = data.drop(['Crop'], axis=1)
