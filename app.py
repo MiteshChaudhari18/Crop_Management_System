@@ -7,6 +7,7 @@ import os
 # Load sample data
 @st.cache_data
 def load_data():
+    # Ensures it works no matter where Streamlit is run from
     data_path = os.path.join(os.path.dirname(__file__), "crop_data.csv")
     data = pd.read_csv(data_path)
     return data
@@ -15,6 +16,7 @@ def load_data():
 @st.cache_resource
 def train_crop_model():
     model = RandomForestClassifier()
+    # Dummy training data (you can update with real data later)
     X = [[22, 80, 0, 200], [24, 82, 1, 250]]
     y = ["Rice", "Wheat"]
     model.fit(X, y)
@@ -23,25 +25,26 @@ def train_crop_model():
 @st.cache_resource
 def train_yield_model():
     model = LinearRegression()
+    # Dummy training data (can be replaced with rainfall_yield.py logic)
     X = [[2015, 200], [2016, 220]]
     y = [2.5, 2.7]
     model.fit(X, y)
     return model
 
-# Page config
+# Streamlit Page Config
 st.set_page_config(page_title="Crop Management System", layout="wide")
 
-# Title
+# Page Title
 st.markdown("""
     <h1 style='text-align: center; color: #2E86C1;'>Crop Management System</h1>
     <h4 style='text-align: center; color: gray;'>A smart assistant for better farming decisions</h4>
     <hr style="border:1px solid #bbb">
 """, unsafe_allow_html=True)
 
-# Load dataset
+# Load CSV dataset
 data = load_data()
 
-# Show sample dataset
+# Dataset Preview
 with st.expander("📊 View Sample Dataset"):
     st.dataframe(data, use_container_width=True)
 
@@ -68,7 +71,7 @@ with tab1:
         submit = st.form_submit_button("Predict Crop")
 
         if submit:
-            # Encode and store soil type
+            # Encode soil type
             soil_map = {"Sandy": 0, "Loamy": 1, "Clay": 2}
             soil_encoded = soil_map[soil_type]
             st.session_state["soil_type"] = soil_type
@@ -112,3 +115,4 @@ with tab3:
             model = train_yield_model()
             predicted_yield = model.predict([[year_input, rain_input]])
             st.success(f"🌱 Estimated Yield: {predicted_yield[0]:.2f} tons/hectare")
+
