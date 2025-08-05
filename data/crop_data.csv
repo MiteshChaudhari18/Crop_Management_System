@@ -1,9 +1,0 @@
-Temperature,Humidity,Soil_Type,Rainfall,Crop
-22,80,0,200,Rice
-24,82,1,250,Wheat
-26,85,2,300,Maize
-23,79,0,180,Rice
-25,78,1,220,Wheat
-21,81,2,270,Maize
-27,84,0,320,Rice
-28,86,1,310,Wheat
