@@ -6,7 +6,7 @@ from sklearn.linear_model import LinearRegression
 # Load sample data
 @st.cache_data
 def load_data():
-    data = pd.read_csv("../data/crop_data.csv")
+   data = pd.read_csv("crop_data.csv")
     return data
 
 # Page config
