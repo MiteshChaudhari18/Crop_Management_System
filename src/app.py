@@ -6,7 +6,7 @@ from sklearn.linear_model import LinearRegression
 # Load sample data
 @st.cache_data
 def load_data():
-   data = pd.read_csv("crop_data.csv")
+    data = pd.read_csv("crop_data.csv")
     return data
 
 # Page config
@@ -51,11 +51,12 @@ with tab1:
                 soil_map = {"Sandy": 0, "Loamy": 1, "Clay": 2}
                 soil_encoded = soil_map[soil_type]
 
+                # Dummy training data
                 model = RandomForestClassifier()
                 model.fit([[22, 80, 0, 200], [24, 82, 1, 250]], ["Rice", "Wheat"])
-                prediction = model.predict([[temp, humidity, soil_encoded, rainfall]])
 
-                st.success(f"Recommended Crop: {prediction[0]}")
+                prediction = model.predict([[temp, humidity, soil_encoded, rainfall]])
+                st.success(f"🌾 Recommended Crop: {prediction[0]}")
 
 # --------- Fertilizer Suggestion ---------
 with tab2:
@@ -65,11 +66,11 @@ with tab2:
 
     if st.button("Get Fertilizer Suggestion"):
         if soil_type == "Sandy":
-            st.success("Recommended: Urea — Nitrogen-rich, ideal for sandy soil.")
+            st.success("🧪 Recommended: Urea — Nitrogen-rich, ideal for sandy soil.")
         elif soil_type == "Loamy":
-            st.success("Recommended: NPK — Balanced nutrients for loamy soil.")
+            st.success("🧪 Recommended: NPK — Balanced nutrients for loamy soil.")
         else:
-            st.success("Recommended: Superphosphate — Great for clay soils.")
+            st.success("🧪 Recommended: Superphosphate — Great for clay soils.")
 
 # --------- Yield Estimator ---------
 with tab3:
@@ -86,7 +87,10 @@ with tab3:
             yield_submit = st.form_submit_button("Estimate Yield")
 
             if yield_submit:
+                # Dummy training data
                 model = LinearRegression()
                 model.fit([[2015, 200], [2016, 220]], [2.5, 2.7])
+
                 predicted_yield = model.predict([[year_input, rain_input]])
-                st.success(f"Estimated Yield: {predicted_yield[0]:.2f} tons/hectare")
+                st.success(f"🌱 Estimated Yield: {predicted_yield[0]:.2f} tons/hectare")
+
